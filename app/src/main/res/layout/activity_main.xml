@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bank_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lessons.vs.petersonapps.converterlab.MainActivity"
+    tools:listitem="@layout/bank_card_view"
+    android:background="@color/divider"
+    android:paddingLeft="@dimen/dp_8"
+    android:paddingRight="@dimen/dp_8">
+
+    </android.support.v7.widget.RecyclerView>

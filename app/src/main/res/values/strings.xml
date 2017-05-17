@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Converter Lab</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="bank_region">Bank region</string>
+    <string name="bank_city">Bank city</string>
+    <string name="menu_item_title"></string>
+    <string name="search">search</string>
+</resources>

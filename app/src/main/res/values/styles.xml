@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <style name="textStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="textMain" parent="textStyle">
+        <item name="android:textSize">26dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textMainAccent" parent="textMain">
+        <item name="android:textColor">@color/accent</item>
+    </style>
+
+    <style name="textGeneral" parent="textStyle">
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginTop">@dimen/dp_5</item>
+        <item name="android:layout_marginBottom">@dimen/dp_5</item>
+    </style>
+
+    <style name="textSmall" parent="textStyle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_margin">@dimen/dp_5</item>
+    </style>
+
+    <style name="textSmallRight" parent="textStyle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_margin">@dimen/dp_5</item>
+        <item name="android:layout_gravity">right</item>
+    </style>
+
+    <style name="cardViewButtons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/d40</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+</resources>
