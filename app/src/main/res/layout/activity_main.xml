@@ -7,7 +7,7 @@
     android:id="@+id/bank_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lessons.vs.petersonapps.converterlab.MainActivity"
+    tools:context="lessons.vs.petersonapps.converterlab.view.MainActivity"
     tools:listitem="@layout/bank_card_view"
     android:background="@color/divider"
     android:paddingLeft="@dimen/dp_8"

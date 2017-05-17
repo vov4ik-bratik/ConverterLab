@@ -1,6 +1,5 @@
-package lessons.vs.petersonapps.converterlab;
+package lessons.vs.petersonapps.converterlab.view;
 
-import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,20 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by vs on 11.05.2017.
- */
+import lessons.vs.petersonapps.converterlab.R;
+import lessons.vs.petersonapps.converterlab.model.DataModel;
+import lessons.vs.petersonapps.converterlab.model.Organizations_;
 
 public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksViewHolder> implements Filterable {
 
-    private final List<TmpModel> bankList;
+    private final List<Organizations_> bankList;
 
     private CustomFilter customFilter;
 
-    BankListAdapter(List<TmpModel> bankList) {
+    BankListAdapter(List<Organizations_> bankList) {
         this.bankList = bankList;
     }
 
@@ -42,12 +40,12 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
 
     @Override
     public void onBindViewHolder(BanksViewHolder holder, int position) {
-        TmpModel bankItem = bankList.get(position);
-        holder.bankNameTV.setText(bankItem.getBankName());
-        holder.bankRegionTV.setText(bankItem.getBankRegion());
-        holder.bankCityTV.setText(bankItem.getBankCity());
-        holder.bankPhoneTV.setText(bankItem.getBankPhone());
-        holder.bankAddressTV.setText(bankItem.getBankAdress());
+        Organizations_ bankItem = bankList.get(position);
+        holder.bankNameTV.setText(bankItem.getTytle());
+        holder.bankRegionTV.setText(bankItem.getRegionId());
+        holder.bankCityTV.setText(bankItem.getCityId());
+        holder.bankPhoneTV.setText(bankItem.getPhone());
+        holder.bankAddressTV.setText(bankItem.getAddress());
     }
 
     @Override
@@ -66,11 +64,11 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
 
         private final BankListAdapter adapter;
 
-        private final List<TmpModel> originalList;
+        private final List<Organizations_> originalList;
 
-        private final List<TmpModel> filteredList;
+        private final List<Organizations_> filteredList;
 
-        private CustomFilter(BankListAdapter adapter, List<TmpModel> originalList) {
+        private CustomFilter(BankListAdapter adapter, List<Organizations_> originalList) {
             super();
             this.adapter = adapter;
             this.originalList = new ArrayList<>(originalList);
@@ -88,7 +86,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             } else {
                 final String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (final TmpModel item : originalList) {
+                for (final Organizations_ item : originalList) {
                     if (item.toString().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
@@ -102,7 +100,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             adapter.bankList.clear();
-            adapter.bankList.addAll((ArrayList<TmpModel>) results.values);
+            adapter.bankList.addAll((ArrayList<Organizations_>) results.values);
             adapter.notifyDataSetChanged();
         }
     }
@@ -175,7 +173,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             setImageButtonPressedFlag(0);
 
             Toast.makeText(view.getContext(),
-                    "link button on pressed " + bankList.get(getAdapterPosition()).getBankName(),
+                    "link button on pressed",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -184,7 +182,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             setImageButtonPressedFlag(1);
 
             Toast.makeText(view.getContext(),
-                    "location button pressed " + bankList.get(getAdapterPosition()).getBankName(),
+                    "location button pressed",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -193,7 +191,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             setImageButtonPressedFlag(2);
 
             Toast.makeText(view.getContext(),
-                    "phone button pressed " + bankList.get(getAdapterPosition()).getBankName(),
+                    "phone button pressed",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -202,7 +200,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             setImageButtonPressedFlag(3);
 
             Toast.makeText(view.getContext(),
-                    "more button pressed " + bankList.get(getAdapterPosition()).getBankName(),
+                    "more button pressed",
                     Toast.LENGTH_SHORT).show();
         }
 

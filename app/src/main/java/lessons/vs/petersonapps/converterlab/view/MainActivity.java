@@ -1,4 +1,4 @@
-package lessons.vs.petersonapps.converterlab;
+package lessons.vs.petersonapps.converterlab.view;
 
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +14,15 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import lessons.vs.petersonapps.converterlab.R;
+import lessons.vs.petersonapps.converterlab.model.DataModel;
+import lessons.vs.petersonapps.converterlab.model.Organizations_;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView bankListRV;
     BankListAdapter bankListAdapter;
-    List<TmpModel> bankTmpList;
+    List<Organizations_> bankList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         bankListRV = bind(R.id.bank_list);
 
-        generateTestBankList();
+        // TODO:  initialize bankList
 
-        bankListAdapter = new BankListAdapter(bankTmpList);
+        bankListAdapter = new BankListAdapter(bankList);
 
         bankListRV.setAdapter(bankListAdapter);
         bankListRV.setLayoutManager(new LinearLayoutManager(this));
@@ -67,15 +71,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("h",false);
-    }
-
-    private void generateTestBankList() {
-
-        bankTmpList = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            bankTmpList.add(new TmpModel("Bank" + i, "Region" + i, "City" + i, "Phone" + i, "Address" + i));
-        }
     }
 
 
