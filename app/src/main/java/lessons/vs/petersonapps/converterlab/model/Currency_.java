@@ -1,11 +1,15 @@
 package lessons.vs.petersonapps.converterlab.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by vs on 17.05.2017.
  */
 
 class Currency_ {
+    @SerializedName("ask")
     String ask;
+    @SerializedName("bid")
     String bid;
 
     public Currency_() {

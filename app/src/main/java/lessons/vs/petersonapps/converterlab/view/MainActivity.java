@@ -1,6 +1,7 @@
 package lessons.vs.petersonapps.converterlab.view;
 
 import android.support.annotation.IdRes;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,21 +9,24 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lessons.vs.petersonapps.converterlab.R;
+import lessons.vs.petersonapps.converterlab.adapter.BankListAdapter;
 import lessons.vs.petersonapps.converterlab.model.DataModel;
 import lessons.vs.petersonapps.converterlab.model.Organizations_;
+import lessons.vs.petersonapps.converterlab.presenter.ConverterContract;
+import lessons.vs.petersonapps.converterlab.presenter.Presenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConverterContract.View{
 
     RecyclerView bankListRV;
     BankListAdapter bankListAdapter;
-    List<Organizations_> bankList;
+    List<Organizations_> bankList = new ArrayList<>();
+    private ConverterContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
         bankListRV = bind(R.id.bank_list);
 
-        // TODO:  initialize bankList
+        presenter = new Presenter(this);
+        presenter.getData();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         bankListAdapter = new BankListAdapter(bankList);
 
@@ -45,9 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
-        MenuItem item = menu.findItem(R.id.search_menu_button);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search_menu_button));
 
-        SearchView searchView = (SearchView) item.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -82,5 +92,10 @@ public class MainActivity extends AppCompatActivity {
     @SuppressWarnings("unchecked")
     private <T extends View> T bind(@IdRes int resId) {
         return ((T) findViewById(resId));
+    }
+
+    @Override
+    public void setData(DataModel body) {
+        bankList.addAll(body.getOrganizations());
     }
 }

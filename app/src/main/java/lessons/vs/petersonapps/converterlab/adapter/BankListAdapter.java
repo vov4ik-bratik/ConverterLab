@@ -1,4 +1,4 @@
-package lessons.vs.petersonapps.converterlab.view;
+package lessons.vs.petersonapps.converterlab.adapter;
 
 import android.support.annotation.IdRes;
 import android.support.v7.widget.CardView;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lessons.vs.petersonapps.converterlab.R;
-import lessons.vs.petersonapps.converterlab.model.DataModel;
 import lessons.vs.petersonapps.converterlab.model.Organizations_;
 
 public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksViewHolder> implements Filterable {
@@ -25,7 +24,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
 
     private CustomFilter customFilter;
 
-    BankListAdapter(List<Organizations_> bankList) {
+    public BankListAdapter(List<Organizations_> bankList) {
         this.bankList = bankList;
     }
 

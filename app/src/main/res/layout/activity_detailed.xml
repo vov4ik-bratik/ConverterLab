@@ -52,4 +52,41 @@
 
     </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/dp_10">
+
+            <TextView
+                style="@style/textGeneral"
+                android:text="Назва валюти"
+                android:layout_weight="2"/>
+
+            <TextView
+                style="@style/textSmall"
+                android:text="Покупка/продаж" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <ListView
+            android:id="@+id/currency_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/currency_list_item">
+        </ListView>
+
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

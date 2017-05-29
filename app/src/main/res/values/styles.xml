@@ -15,7 +15,7 @@
     </style>
 
     <style name="textMain" parent="textStyle">
-        <item name="android:textSize">26dp</item>
+        <item name="android:textSize">22dp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -24,19 +24,17 @@
     </style>
 
     <style name="textGeneral" parent="textStyle">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:layout_marginTop">@dimen/dp_5</item>
         <item name="android:layout_marginBottom">@dimen/dp_5</item>
     </style>
 
     <style name="textSmall" parent="textStyle">
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:layout_margin">@dimen/dp_5</item>
     </style>
 
-    <style name="textSmallRight" parent="textStyle">
-        <item name="android:textSize">16dp</item>
-        <item name="android:layout_margin">@dimen/dp_5</item>
+    <style name="textSmallRight" parent="textSmall">
         <item name="android:layout_gravity">right</item>
     </style>
 

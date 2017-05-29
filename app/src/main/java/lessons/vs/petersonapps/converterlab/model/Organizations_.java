@@ -1,5 +1,8 @@
 package lessons.vs.petersonapps.converterlab.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,23 +11,34 @@ import java.util.Map;
 
 public class Organizations_ {
 
+    @SerializedName("id")
     String id;
+    @SerializedName("oldId")
     int oldId;
+    @SerializedName("orgType")
     int orgType;
+    @SerializedName("branch")
     boolean branch;
+    @SerializedName("title")
     String tytle;
+    @SerializedName("regionId")
     String regionId;
+    @SerializedName("cityId")
     String cityId;
+    @SerializedName("phone")
     String phone;
+    @SerializedName("address")
     String address;
+    @SerializedName("link")
     String link;
 
-    Map<String, Currency_> currencies;
+    @SerializedName("currencies")
+    HashMap<String, Currency_> currencies;
 
     public Organizations_() {
     }
 
-    public Organizations_(String id, int oldId, int orgType, boolean branch, String tytle, String regionId, String cityId, String phone, String address, String link, Map<String, Currency_> currencies) {
+    public Organizations_(String id, int oldId, int orgType, boolean branch, String tytle, String regionId, String cityId, String phone, String address, String link, HashMap<String, Currency_> currencies) {
         this.id = id;
         this.oldId = oldId;
         this.orgType = orgType;
@@ -36,6 +50,11 @@ public class Organizations_ {
         this.address = address;
         this.link = link;
         this.currencies = currencies;
+    }
+
+    @Override
+    public String toString() {
+        return tytle + regionId + cityId;
     }
 
     public String getId() {
@@ -122,7 +141,7 @@ public class Organizations_ {
         return currencies;
     }
 
-    public void setCurrencies(Map<String, Currency_> currencies) {
+    public void setCurrencies(HashMap<String, Currency_> currencies) {
         this.currencies = currencies;
     }
 }

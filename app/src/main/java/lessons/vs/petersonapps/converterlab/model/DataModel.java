@@ -1,5 +1,9 @@
 package lessons.vs.petersonapps.converterlab.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,21 +13,31 @@ import java.util.Map;
 
 public class DataModel {
 
+    @SerializedName("sourceId")
     private String sourceId;
+    @SerializedName("date")
     private String date;
 
-    List<Organizations_>organizations;
+    @SerializedName("organizations")
+    private ArrayList<Organizations_> organizations;
 
-    Map<String, String> orgTypes;
-    Map<String, String> currencies;
-    Map<String, String> regions;
-    Map<String, String> cities;
+    @SerializedName("orgTypes")
+    HashMap<String, String> orgTypes;
+
+    @SerializedName("currencies")
+    HashMap<String, String> currencies;
+
+    @SerializedName("regions")
+    HashMap<String, String> regions;
+
+    @SerializedName("cities")
+    HashMap<String, String> cities;
 
 
     public DataModel() {
     }
 
-    public DataModel(String sourceId, String date, List<Organizations_> organizations, Map<String, String> orgTypes, Map<String, String> currencies, Map<String, String> regions, Map<String, String> cities) {
+    public DataModel(String sourceId, String date, ArrayList<Organizations_> organizations, HashMap<String, String> orgTypes, HashMap<String, String> currencies, HashMap<String, String> regions, HashMap<String, String> cities) {
         this.sourceId = sourceId;
         this.date = date;
         this.organizations = organizations;
@@ -53,7 +67,7 @@ public class DataModel {
         return organizations;
     }
 
-    public void setOrganizations(List<Organizations_> organizations) {
+    public void setOrganizations(ArrayList<Organizations_> organizations) {
         this.organizations = organizations;
     }
 
@@ -61,7 +75,7 @@ public class DataModel {
         return orgTypes;
     }
 
-    public void setOrgTypes(Map<String, String> orgTypes) {
+    public void setOrgTypes(HashMap<String, String> orgTypes) {
         this.orgTypes = orgTypes;
     }
 
@@ -69,7 +83,7 @@ public class DataModel {
         return currencies;
     }
 
-    public void setCurrencies(Map<String, String> currencies) {
+    public void setCurrencies(HashMap<String, String> currencies) {
         this.currencies = currencies;
     }
 
@@ -77,7 +91,7 @@ public class DataModel {
         return regions;
     }
 
-    public void setRegions(Map<String, String> regions) {
+    public void setRegions(HashMap<String, String> regions) {
         this.regions = regions;
     }
 
@@ -85,7 +99,7 @@ public class DataModel {
         return cities;
     }
 
-    public void setCities(Map<String, String> cities) {
+    public void setCities(HashMap<String, String> cities) {
         this.cities = cities;
     }
 
@@ -94,4 +108,22 @@ public class DataModel {
         return null;
     }
 
+
+    public void convertBankData() {
+
+        for (int i = 0; i < organizations.size(); i++) {
+            for (Map.Entry<String, String> entry:regions.entrySet() ) {
+                if(organizations.get(i).getRegionId().equalsIgnoreCase(entry.getKey())){
+                    organizations.get(i).setRegionId(entry.getValue());
+                }
+            }
+
+            for (Map.Entry<String, String> entry:cities.entrySet() ) {
+                if(organizations.get(i).getCityId().equalsIgnoreCase(entry.getKey())){
+                    organizations.get(i).setCityId(entry.getValue());
+                }
+            }
+
+        }
+    }
 }
