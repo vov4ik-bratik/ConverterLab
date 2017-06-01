@@ -6,13 +6,20 @@ import com.google.gson.annotations.SerializedName;
  * Created by vs on 17.05.2017.
  */
 
-class Currency_ {
+public class Currency_ {
     @SerializedName("ask")
     String ask;
     @SerializedName("bid")
     String bid;
 
+    Double askChangeFlag;
+    Double bidChangeFlag;
+
     public Currency_() {
+        this.ask = "0";
+        this.bid = "0";
+        this.askChangeFlag = 0d;
+        this.bidChangeFlag = 0d;
     }
 
     public Currency_(String ask, String bid) {
@@ -36,4 +43,19 @@ class Currency_ {
         this.bid = bid;
     }
 
+    public Double getAskChangeFlag() {
+        return askChangeFlag;
+    }
+
+    public void setAskChangeFlag(Double askChangeFlag) {
+        this.askChangeFlag = askChangeFlag;
+    }
+
+    public Double getBidChangeFlag() {
+        return bidChangeFlag;
+    }
+
+    public void setBidChangeFlag(Double bidChangeFlag) {
+        this.bidChangeFlag = bidChangeFlag;
+    }
 }

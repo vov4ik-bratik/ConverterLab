@@ -137,7 +137,7 @@ public class Organizations_ {
         this.link = link;
     }
 
-    public Map<String, Currency_> getCurrencies() {
+    public HashMap<String, Currency_> getCurrencies() {
         return currencies;
     }
 

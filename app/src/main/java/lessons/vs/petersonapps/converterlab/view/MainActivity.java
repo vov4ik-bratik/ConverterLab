@@ -16,6 +16,7 @@ import java.util.List;
 
 import lessons.vs.petersonapps.converterlab.R;
 import lessons.vs.petersonapps.converterlab.adapter.BankListAdapter;
+import lessons.vs.petersonapps.converterlab.database.DataBaseManager;
 import lessons.vs.petersonapps.converterlab.model.DataModel;
 import lessons.vs.petersonapps.converterlab.model.Organizations_;
 import lessons.vs.petersonapps.converterlab.presenter.ConverterContract;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements ConverterContract
         presenter.getData();
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements ConverterContract
 
     @Override
     public void setData(DataModel body) {
-        bankList.addAll(body.getOrganizations());
+        DataBaseManager dbManager = DataBaseManager.getInstance(this);
+        dbManager.open();
+        dbManager.addAllDataToDB(body);
+        bankList.addAll(dbManager.getAllOrganizations());
+        dbManager.close();
     }
 }
