@@ -34,7 +34,6 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
 
     @Override
     public BanksViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.bank_card_view, parent, false);
 
@@ -47,8 +46,8 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
         holder.bankNameTV.setText(bankItem.getTytle());
         holder.bankRegionTV.setText(bankItem.getRegionId());
         holder.bankCityTV.setText(bankItem.getCityId());
-        holder.bankPhoneTV.setText(bankItem.getPhone());
-        holder.bankAddressTV.setText(bankItem.getAddress());
+        holder.bankPhoneTV.setText("Тел. " + bankItem.getPhone());
+        holder.bankAddressTV.setText("Адреса: " + bankItem.getAddress());
     }
 
     @Override
@@ -248,32 +247,18 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             }
         }
 
+        private void openDetailedActivity(View view, int pos) {
+            Intent intent = new Intent(view.getContext(), DetailedActivity.class);
+            intent.putExtra("bankId", bankList.get(pos).getId());
+            view.getContext().startActivity(intent);
+
+        }
+
         @SuppressWarnings("unchecked")
         private <T extends View> T bind(@IdRes int resId) {
             return ((T) itemView.findViewById(resId));
         }
     }
-
-    private void openDetailedActivity(View view, int pos) {
-        Intent intent = new Intent(view.getContext(), DetailedActivity.class);
-        intent.putExtra("bankId", bankList.get(pos).getId());
-        intent.putExtra("bankDescr", bankList.get(pos).getTytle());
-        view.getContext().startActivity(intent);
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

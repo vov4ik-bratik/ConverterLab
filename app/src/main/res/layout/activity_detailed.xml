@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/primary_light"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -42,13 +43,13 @@
 
                         <TextView
                             android:id="@+id/detailed_bank_region"
-                            style="@style/textGeneral"
+                            style="@style/textSmall"
                             android:text="@string/bank_region"
                             tools:text="Львiвська область" />
 
                         <TextView
                             android:id="@+id/detailed_bank_city"
-                            style="@style/textGeneral"
+                            style="@style/textSmall"
                             android:text="@string/bank_city"
                             tools:text="Львів" />
 

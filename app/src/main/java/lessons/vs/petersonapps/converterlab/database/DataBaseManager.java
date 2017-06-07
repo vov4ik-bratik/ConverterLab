@@ -189,6 +189,7 @@ public class DataBaseManager {
             org.setAddress(cursor.getString(cursor.getColumnIndex(DataBaseContract.Organisation.COLUMN_ADDRESS)));
             org.setCityId(cursor.getString(cursor.getColumnIndex(DataBaseContract.Organisation.COLUMN_CITY_ID)));
             org.setLink(cursor.getString(cursor.getColumnIndex(DataBaseContract.Organisation.COLUMN_LINK)));
+            org.setRegionId(cursor.getString(cursor.getColumnIndex(DataBaseContract.Organisation.COLUMN_REGION_ID)));
 
             orgList.add(org);
         }
@@ -236,7 +237,7 @@ public class DataBaseManager {
 
             orgTypes.put(mapKey, mapValue);
         }
-
+        cursor.close();
         return orgTypes;
     }
 
