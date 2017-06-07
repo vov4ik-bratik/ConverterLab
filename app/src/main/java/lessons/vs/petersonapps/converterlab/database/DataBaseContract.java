@@ -46,11 +46,11 @@ public final class DataBaseContract {
         public static final String CREATE_TABLE_SQL =
                 "CREATE TABLE " + TABLE_NAME + "(" +
                         COLUMN_KEY_ID + " integer primary key autoincrement, " +
-                        COLUMN_ORGANIZATION + " TEXT " +
-                        COLUMN_NAME_KEY + " TEXT " +
-                        COLUMN_ASK + " TEXT " +
-                        COLUMN_ASK_FLAG + " REAL " +
-                        COLUMN_BID + " TEXT " +
+                        COLUMN_ORGANIZATION + " TEXT, " +
+                        COLUMN_NAME_KEY + " TEXT, " +
+                        COLUMN_ASK + " TEXT, " +
+                        COLUMN_ASK_FLAG + " REAL, " +
+                        COLUMN_BID + " TEXT, " +
                         COLUMN_BID_FLAG + " REAL, " +
                         " FOREIGN KEY (" + COLUMN_ORGANIZATION + ") REFERENCES " +
                         Organisation.TABLE_NAME + "(" + Organisation.COLUMN_ID + ")" +
