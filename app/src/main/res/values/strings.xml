@@ -5,4 +5,5 @@
     <string name="bank_city">Bank city</string>
     <string name="menu_item_title"></string>
     <string name="search">search</string>
+    <string name="title_activity_detailed">DetailedActivity</string>
 </resources>

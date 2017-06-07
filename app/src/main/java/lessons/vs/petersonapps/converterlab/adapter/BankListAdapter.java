@@ -1,5 +1,7 @@
 package lessons.vs.petersonapps.converterlab.adapter;
 
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,8 @@ import java.util.List;
 
 import lessons.vs.petersonapps.converterlab.R;
 import lessons.vs.petersonapps.converterlab.model.Organizations_;
+import lessons.vs.petersonapps.converterlab.view.DetailedActivity;
+import lessons.vs.petersonapps.converterlab.view.MainActivity;
 
 public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksViewHolder> implements Filterable {
 
@@ -195,12 +199,8 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
         }
 
         private void onMoreButtonPressed(View view) {
-
             setImageButtonPressedFlag(3);
-
-            Toast.makeText(view.getContext(),
-                    "more button pressed",
-                    Toast.LENGTH_SHORT).show();
+            openDetailedActivity(view, getAdapterPosition());
         }
 
         private void setImageButtonPressedFlag(int position) {
@@ -253,4 +253,27 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
             return ((T) itemView.findViewById(resId));
         }
     }
+
+    private void openDetailedActivity(View view, int pos) {
+        Intent intent = new Intent(view.getContext(), DetailedActivity.class);
+        intent.putExtra("bankId", bankList.get(pos).getId());
+        intent.putExtra("bankDescr", bankList.get(pos).getTytle());
+        view.getContext().startActivity(intent);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

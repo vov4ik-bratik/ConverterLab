@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by vs on 17.05.2017.
  */
 
-public class Organizations_ {
+public class Organizations_{
 
     @SerializedName("id")
     String id;
