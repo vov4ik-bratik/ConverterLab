@@ -5,5 +5,11 @@
     <string name="bank_city">Bank city</string>
     <string name="menu_item_title"></string>
     <string name="search">search</string>
+    <string name="share">share</string>
     <string name="title_activity_detailed">DetailedActivity</string>
+    <string name="region">Регіон:</string>
+    <string name="city">Місто:</string>
+    <string name="Phone">Тел.</string>
+    <string name="Address">Адреса:</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

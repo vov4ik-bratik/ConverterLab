@@ -45,15 +45,14 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="floating_action_menu_style">
-        <item name="android:background">@drawable/fam_background</item>
-        <item name="android:textColor">@color/primary_text</item>
-
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="FAB">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

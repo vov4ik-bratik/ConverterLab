@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ConverterContract
         presenter = new Presenter(this);
         presenter.getData();
 
-        //// TODO: 07.06.2017 add asynktask and service
+        // TODO: 07.06.2017 add asynktask and service
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -91,9 +91,12 @@ public class MainActivity extends AppCompatActivity implements ConverterContract
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        // TODO: 08.06.2017 implement onSaveInstanceState/onRestore
         super.onSaveInstanceState(outState);
         outState.putBoolean("h",false);
     }
+
+
 
     @SuppressWarnings("unchecked")
     private <T extends View> T bind(@IdRes int resId, View view) {
@@ -107,11 +110,13 @@ public class MainActivity extends AppCompatActivity implements ConverterContract
 
     @Override
     public void setData(DataModel body) {
+        // TODO: 07.06.2017 add update/get from DB data logic with service; to reduce load shoul check data date from service with data in DB - if it the same dont rewrite DB
         DataBaseManager dbManager = DataBaseManager.getInstance(this);
         dbManager.open();
         dbManager.addAllDataToDB(body);
         bankList.addAll(dbManager.getAllOrganizations());
         dbManager.close();
+
     }
 
     @Override
@@ -119,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements ConverterContract
         swipeRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //// TODO: 07.06.2017 add update/get from DB data logic with service
                 presenter.getData();
                 swipeRefreshLayout.setRefreshing(false);
             }

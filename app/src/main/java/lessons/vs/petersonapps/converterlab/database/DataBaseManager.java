@@ -9,15 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import lessons.vs.petersonapps.converterlab.model.Currency_;
 import lessons.vs.petersonapps.converterlab.model.DataModel;
 import lessons.vs.petersonapps.converterlab.model.Organizations_;
-
-/**
- * Created by vs on 29.05.2017.
- */
 
 public class DataBaseManager {
 
@@ -35,7 +30,6 @@ public class DataBaseManager {
     public static synchronized DataBaseManager getInstance(final Context context) {
         if (INSTANCE == null)
             INSTANCE = new DataBaseManager(context);
-
         return INSTANCE;
 
     }
@@ -198,17 +192,16 @@ public class DataBaseManager {
         for (Organizations_ org : orgList) {
             org.setCurrencies(getAllOrganizationExchangeRate(org.getId()));
         }
-
         return orgList;
     }
 
     public final HashMap<String, Currency_> getAllOrganizationExchangeRate(String organizationID) {
         HashMap<String, Currency_> currencies = new HashMap<>();
         String mapKey;
-        Currency_ mapValue = new Currency_();
         Cursor cursor = dataBase.query(DataBaseContract.ExchangeRate.TABLE_NAME, null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
+            Currency_ mapValue = new Currency_();
             if (cursor.getString(cursor.getColumnIndex(DataBaseContract.ExchangeRate.COLUMN_ORGANIZATION)).equals(organizationID)) {
                 mapKey = cursor.getString(cursor.getColumnIndex(DataBaseContract.ExchangeRate.COLUMN_NAME_KEY));
                 mapValue.setAsk(cursor.getString(cursor.getColumnIndex(DataBaseContract.ExchangeRate.COLUMN_ASK)));

@@ -3,7 +3,6 @@ package lessons.vs.petersonapps.converterlab.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by vs on 17.05.2017.
