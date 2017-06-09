@@ -40,8 +40,7 @@ public class DataBaseManager {
     }
 
     public final boolean isOpen() {
-        boolean isOpen = dataBase != null && dataBase.isOpen();
-        return isOpen;
+        return dataBase != null && dataBase.isOpen();
     }
 
     public final void close() {
