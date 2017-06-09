@@ -1,5 +1,6 @@
 package lessons.vs.petersonapps.converterlab.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.IdRes;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import lessons.vs.petersonapps.converterlab.R;
 import lessons.vs.petersonapps.converterlab.model.Organizations_;
+import lessons.vs.petersonapps.converterlab.utils.Utils;
 import lessons.vs.petersonapps.converterlab.view.DetailedActivity;
 import lessons.vs.petersonapps.converterlab.view.MainActivity;
 
@@ -28,8 +30,16 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
 
     private CustomFilter customFilter;
 
+    Context context;
+
     public BankListAdapter(List<Organizations_> bankList) {
         this.bankList = bankList;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        context = recyclerView.getContext();
     }
 
     @Override
@@ -47,7 +57,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
         holder.bankRegionTV.setText(bankItem.getRegionId());
         holder.bankCityTV.setText(bankItem.getCityId());
         holder.bankPhoneTV.setText("Тел. " + bankItem.getPhone());
-        holder.bankAddressTV.setText("Адреса: " + bankItem.getAddress());
+        holder.bankAddressTV.setText(bankItem.getAddress());
     }
 
     @Override
@@ -180,12 +190,8 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
         }
 
         private void onLocationButtonPressed(View view) {
-
             setImageButtonPressedFlag(1);
-
-            Toast.makeText(view.getContext(),
-                    "location button pressed",
-                    Toast.LENGTH_SHORT).show();
+            Utils.getInstance(context).openMap(bankCityTV.getText().toString(), bankAddressTV.getText().toString());
         }
 
         private void onPhoneButtonPressed(View view) {
