@@ -2,14 +2,15 @@ package lessons.vs.petersonapps.converterlab.utils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 
-import java.io.IOException;
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import lessons.vs.petersonapps.converterlab.view.MapsActivity;
 
@@ -32,20 +33,15 @@ public class Utils {
         this.context = context;
     }
 
-    public static Utils getInstance(Context context){
-        if(instance == null){
+    public static Utils getInstance(Context context) {
+        if (instance == null) {
             instance = new Utils(context);
         }
         return instance;
     }
 
-    public void openMap(String city, String address){
-
+    public void openMap(String city, String address) {
         setCoordinates(city, address);
-
-//        Uri gmmIntentUri = Uri.parse("geo:" + lat + "," + lon);
-//        Intent intent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//        context.startActivity(intent);
 
         Intent intent = new Intent(context, MapsActivity.class);
         intent.putExtra(LATITUDE, lat);
@@ -55,17 +51,7 @@ public class Utils {
     }
 
     private void setCoordinates(String city, String address) {
-        Geocoder geocoder = new Geocoder(context);
-        List<Address> addresses = null;
-        try {
-            addresses = geocoder.getFromLocationName(city + ", " + address, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(addresses.size() > 0) {
-            lat= addresses.get(0).getLatitude();
-            lon= addresses.get(0).getLongitude();
-        }
+        new GetCoordinates().execute(city + "+" + address.replace(", ", "+").replace(". ", "+").replace(" ", "+"));
     }
 
 
@@ -73,5 +59,54 @@ public class Utils {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+
+    private class GetCoordinates extends AsyncTask<String, Void, String> {
+        ProgressDialog dialog = new ProgressDialog(context);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Please wait....");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String response;
+            try {
+                String address = strings[0];
+                HttpDataHandler http = new HttpDataHandler();
+                String url = String.format("https://maps.googleapis.com/maps/api/geocode/json?address=%s", address);
+                response = http.getHTTPData(url);
+                return response;
+            } catch (Exception ex) {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+
+                String latitude = ((JSONArray) jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry")
+                        .getJSONObject("location").get("lat").toString();
+                String longtitude = ((JSONArray) jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry")
+                        .getJSONObject("location").get("lng").toString();
+
+                lat = Double.parseDouble(latitude);
+                lon = Double.parseDouble(longtitude);
+
+                if (dialog.isShowing())
+                    dialog.dismiss();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
