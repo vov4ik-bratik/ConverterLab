@@ -3,6 +3,7 @@ package lessons.vs.petersonapps.converterlab.view;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import lessons.vs.petersonapps.converterlab.R;
+import lessons.vs.petersonapps.converterlab.utils.GetCoordinates;
 import lessons.vs.petersonapps.converterlab.utils.Utils;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -23,8 +25,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap myMap;
     private Marker marker;
 
-    private double lat = 0d;
-    private double lon = 0d;
+    private String city;
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent = getIntent();
 
-        lat = intent.getDoubleExtra(Utils.LATITUDE, 0);
-        lon = intent.getDoubleExtra(Utils.LONGITUDE, 0);
+        city = intent.getStringExtra(Utils.CITY);
+        address = intent.getStringExtra(Utils.ADDRESS);
         initMap();
     }
 
@@ -47,15 +49,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         myMap = googleMap;
-        LatLng bankPosition = new LatLng(lat, lon);
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(bankPosition)
-                .zoom(10)
-                .build();
-        changeCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-        myMap.clear();
-        marker = myMap.addMarker(new MarkerOptions().position(bankPosition));
+        if(Utils.getInstance(getApplicationContext()).isOnline(getApplicationContext())){
+            new GetCoordinates(this){
+
+                @Override
+                protected void onPostExecute(LatLng latLng) {
+                    super.onPostExecute(latLng);
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(latLng)
+                            .zoom(17)
+                            .build();
+                    changeCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                    myMap.clear();
+                    marker = myMap.addMarker(new MarkerOptions().position(latLng));
+
+                }
+            }.execute(city + "+" + address.replace(", ", "+").replace(". ", "+").replace(" ", "+"));
+        }
+        else {
+            Toast.makeText(this, "network is unavailable", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

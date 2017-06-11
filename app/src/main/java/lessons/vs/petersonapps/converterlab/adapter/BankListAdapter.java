@@ -181,12 +181,13 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
         }
 
         private void onLInkButtonPressed(View view) {
-
             setImageButtonPressedFlag(0);
-
-            Toast.makeText(view.getContext(),
-                    "link button on pressed",
-                    Toast.LENGTH_SHORT).show();
+            for (Organizations_ org:bankList) {
+                if(org.getTytle().equals(bankNameTV.getText())){
+                    Utils.getInstance(context).openBrowser(org.getLink());
+                    break;
+                }
+            }
         }
 
         private void onLocationButtonPressed(View view) {
@@ -198,9 +199,7 @@ public class BankListAdapter extends RecyclerView.Adapter<BankListAdapter.BanksV
 
             setImageButtonPressedFlag(2);
 
-            Toast.makeText(view.getContext(),
-                    "phone button pressed",
-                    Toast.LENGTH_SHORT).show();
+            Utils.getInstance(context).makeCall(bankPhoneTV.getText().toString().replace("Тел. ", ""));
         }
 
         private void onMoreButtonPressed(View view) {
