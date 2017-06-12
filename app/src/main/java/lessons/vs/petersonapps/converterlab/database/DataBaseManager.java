@@ -79,7 +79,7 @@ public class DataBaseManager {
                 values.put(DataBaseContract.ExchangeRate.COLUMN_NAME_KEY, entry.getKey());
                 values.put(DataBaseContract.ExchangeRate.COLUMN_ASK, entry.getValue().getAsk());
                 values.put(DataBaseContract.ExchangeRate.COLUMN_BID, entry.getValue().getBid());
-
+//TODO edit currency comparison - cant compare using list index, because we can get different banl list size
                 if (!orgFromDB.get(i).getCurrencies().isEmpty()) {
                     for (Map.Entry<String, Currency_> entryFromDB : orgFromDB.get(i).getCurrencies().entrySet()) {
                         if (entry.getKey().equals(entryFromDB.getKey())) {

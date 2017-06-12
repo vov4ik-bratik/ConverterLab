@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marker = myMap.addMarker(new MarkerOptions().position(latLng));
 
                 }
-            }.execute(city + "+" + address.replace(", ", "+").replace(". ", "+").replace(" ", "+"));
+            }.execute(city + "+" + address.replace(", ", "+").replace(". ", "+").replace(" ", "+"), city);
         }
         else {
             Toast.makeText(this, "network is unavailable", Toast.LENGTH_SHORT).show();

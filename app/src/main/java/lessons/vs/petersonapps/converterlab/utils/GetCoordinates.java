@@ -38,14 +38,21 @@ public class GetCoordinates extends AsyncTask<String, Void, LatLng> {
             HttpDataHandler http = new HttpDataHandler();
             String url = String.format("https://maps.googleapis.com/maps/api/geocode/json?address=%s", address);
             response = http.getHTTPData(url);
-            return parseJson(response);
+            if (!response.contains("ZERO_RESULTS")){
+                return parseJson(response);
+            }
+            else{
+                url = String.format("https://maps.googleapis.com/maps/api/geocode/json?address=%s", strings[1]);
+                response = http.getHTTPData(url);
+                return parseJson(response);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return new LatLng(0, 0);
     }
 
-    private LatLng parseJson(String s){
+    private LatLng parseJson(String s) {
         double lat;
         double lon;
         try {
@@ -70,26 +77,4 @@ public class GetCoordinates extends AsyncTask<String, Void, LatLng> {
         return new LatLng(0, 0);
     }
 
-
-
-//    @Override
-//    protected void onPostExecute(String s) {
-//        try {
-//            JSONObject jsonObject = new JSONObject(s);
-//
-//            String latitude = ((JSONArray) jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry")
-//                    .getJSONObject("location").get("lat").toString();
-//            String longtitude = ((JSONArray) jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry")
-//                    .getJSONObject("location").get("lng").toString();
-//
-//            lat = Double.parseDouble(latitude);
-//            lon = Double.parseDouble(longtitude);
-//
-//            if (dialog.isShowing())
-//                dialog.dismiss();
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
